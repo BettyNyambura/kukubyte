@@ -2,17 +2,20 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <section id="home" className="bg-gradient-to-br from-green-100 to-green-200 py-20">
+    <section
+      id="home"
+      className="pt-32 pb-20 bg-gradient-to-br from-green-100 via-white to-red-100"
+    >
       <div className="container mx-auto text-center px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-green-800 mb-4 leading-tight">
-          Book Fresh Farm Chicken Today
+        <h1 className="text-4xl md:text-5xl font-extrabold text-green-800 mb-6 leading-tight drop-shadow-sm">
+          Fresh Farm Chicken Delivered to Your Door
         </h1>
-        <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-          We raise and deliver quality poultry directly to you—book online now!
+        <p className="text-lg md:text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
+          We raise premium poultry with care and deliver directly to you. No middlemen. Just healthy, tasty chicken!
         </p>
-        <a 
-          href="#signup" 
-          className="bg-green-600 text-white px-8 py-4 rounded-full text-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl transform hover:scale-105"
+        <a
+          href="#signup"
+          className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-md hover:shadow-xl transform hover:scale-105"
         >
           Get Started
         </a>

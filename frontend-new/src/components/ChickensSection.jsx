@@ -1,15 +1,15 @@
 import React from 'react';
 
-// Chicken Card Component
-const ChickenCard = ({ name, price, weight }) => {
+const ChickenCard = () => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow border border-gray-100">
-      <div className="text-4xl mb-4">🐔</div>
-      <h3 className="text-xl font-semibold text-gray-800 mb-2">{name} {weight}</h3>
-      <p className="text-2xl font-bold text-green-600 mb-4">KES {price}</p>
-      <a 
-        href="#signup" 
-        className="inline-block bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-colors shadow-md hover:shadow-lg"
+    <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 text-center">
+      <div className="text-6xl mb-4">🐔</div>
+      <h3 className="text-2xl font-semibold text-gray-800 mb-2">Broiler Chicken</h3>
+      <p className="text-lg text-gray-600 mb-4">Sold per kilogram</p>
+      <p className="text-3xl font-bold text-green-600 mb-6">KES 400 / KG</p>
+      <a
+        href="#signup"
+        className="inline-block bg-gradient-to-r from-green-600 to-lime-500 text-white px-6 py-3 rounded-full font-medium shadow-md hover:from-green-700 hover:to-lime-600 transition"
       >
         Order Now
       </a>
@@ -17,32 +17,19 @@ const ChickenCard = ({ name, price, weight }) => {
   );
 };
 
-// Main Chickens Section
 const ChickensSection = () => {
-  const chickens = [
-    { name: "Broiler", weight: "2kg", price: "800" },
-    { name: "Kienyeji", weight: "1.5kg", price: "700" }
-  ];
-
   return (
-    <section id="chickens" className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-green-800 mb-8">
-          🐔 Chickens Available
+    <section id="chickens" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-4xl mx-auto px-6 text-center">
+        <h2 className="text-4xl font-extrabold text-green-800 mb-4 tracking-tight">
+          Farm Fresh Broiler Chickens
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-          {chickens.map((chicken, index) => (
-            <ChickenCard 
-              key={index}
-              name={chicken.name}
-              weight={chicken.weight}
-              price={chicken.price}
-            />
-          ))}
-        </div>
-        <p className="text-center mt-8 text-gray-600 text-lg">
-          Sign up to place your order today!
+        <p className="text-lg text-gray-600 mb-12">
+          Get clean, fully matured chickens straight from the farm. No middlemen, just healthy birds.
         </p>
+        <div className="max-w-md mx-auto">
+          <ChickenCard />
+        </div>
       </div>
     </section>
   );
