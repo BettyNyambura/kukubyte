@@ -81,7 +81,7 @@ const BookChicken = () => {
               <option value="" disabled>
                 Choose weight
               </option>
-              {[1, 1.5, 2, 2.5, 3].map((weight) => (
+              {[1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 'Over 2'].map((weight) => (
                 <option key={weight} value={weight}>
                   {weight} kg
                 </option>
