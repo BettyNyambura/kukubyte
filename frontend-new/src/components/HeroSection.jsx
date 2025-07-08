@@ -15,7 +15,7 @@ const HeroSection = () => {
           We raise premium poultry with care and deliver directly to you. No middlemen. Just healthy, tasty chicken!
         </p>
         <Link
-          to="/signup"
+          to="/dashboard"
           className="bg-red-500 hover:bg-red-600 text-white hover:text-black px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-md hover:shadow-xl transform hover:scale-105"
         >
           Get Started
