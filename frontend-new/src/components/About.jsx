@@ -2,7 +2,10 @@ import React from 'react';
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-16 bg-white w-screen overflow-x-hidden">
+    <section
+      id="about"
+      className="pt-32 pb-20 bg-white w-screen overflow-x-hidden"
+    >
       <div className="w-full max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-green-800 mb-8">
           👩‍🌾 About Me
