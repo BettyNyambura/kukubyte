@@ -25,7 +25,7 @@ class Chicken(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    stock = db.Column(db.Integer, nullable=False)
+    stock = db.Column(db.Float, nullable=False)  # Changed to Float
     description = db.Column(db.Text, nullable=True)
 
     def __init__(self, name, price, stock, description=None):
@@ -38,8 +38,8 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     chicken_id = db.Column(db.Integer, db.ForeignKey('chicken.id'), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    location = db.Column(db.String(200), nullable=False)  # Added for per-order location
+    quantity = db.Column(db.Float, nullable=False)  # Changed to Float
+    location = db.Column(db.String(200), nullable=False)
     order_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
     status = db.Column(db.String(20), default='pending')
     user = db.relationship('User', backref=db.backref('bookings', lazy=True))

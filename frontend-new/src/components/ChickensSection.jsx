@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ChickenCard = () => {
   return (
@@ -7,12 +8,12 @@ const ChickenCard = () => {
       <h3 className="text-2xl font-semibold text-gray-800 mb-2">Broiler Chicken</h3>
       <p className="text-lg text-gray-600 mb-4">Sold per kilogram</p>
       <p className="text-3xl font-bold text-green-600 mb-6">KES 400 / KG</p>
-      <a
-        href="#signup"
+      <Link
+        to="/signup"
         className="inline-block bg-gradient-to-r from-green-600 to-lime-500 text-white px-6 py-3 rounded-full font-medium shadow-md hover:from-green-700 hover:to-lime-600 transition"
       >
         Order Now
-      </a>
+      </Link>
     </div>
   );
 };

@@ -1,8 +1,15 @@
 import React from 'react';
 import logo from './images/logo.jpg'; 
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
+
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50">
       {/* Header Section */}
@@ -31,23 +38,10 @@ const Dashboard = () => {
                 className="bg-red-500 text-white hover:text-black px-4 py-2 rounded-full hover:bg-red-600 transition-all shadow-md flex items-center space-x-2"
                 onClick={() => {
                   console.log('Logout clicked');
+                  navigate('/login');
                 }}
               >
                 <span>Logout</span>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7"
-                  />
-                </svg>
               </button>
             </div>
           </div>
@@ -125,7 +119,7 @@ const Dashboard = () => {
           </div>
 
           {/* Orders Card */}
-          <div className="group bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-green-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+          {/* <div className="group bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-green-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
             <div className="flex items-start justify-between mb-6">
               <div className="bg-gradient-to-r from-green-400 to-green-500 p-4 rounded-2xl group-hover:scale-110 transition-transform duration-300">
                 <span className="text-3xl">🧾</span>
@@ -149,7 +143,7 @@ const Dashboard = () => {
                 Last order: 2 days ago
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Recent Activity */}

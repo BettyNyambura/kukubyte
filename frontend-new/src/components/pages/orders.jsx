@@ -1,20 +1,21 @@
 import React from 'react';
+import axios from 'axios';
 
-// const Orders = () => {
-//   const [orders, setOrders] = useState([]);
-//   const [loading, setLoading] = useState(true);
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-//   useEffect(() => {
-//     axios.get('http://localhost:5000/api/orders') // Update with your backend URL
-//       .then((res) => {
-//         setOrders(res.data);
-//         setLoading(false);
-//       })
-//       .catch((err) => {
-//         console.error("Failed to fetch orders:", err);
-//         setLoading(false);
-//       });
-//   }, []);
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/orders') // Update with your backend URL
+      .then((res) => {
+        setOrders(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch orders:", err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
@@ -57,6 +58,6 @@ import React from 'react';
       </div>
     </div>
   );
-// };
+};
 
 export default Orders;

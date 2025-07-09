@@ -10,6 +10,7 @@ import SignupPage from './components/pages/signup';
 import LoginPage from './components/pages/login';
 import Dashboard from './components/pages/dashboard';
 import BookChicken from './components/pages/bookchicken';
+import Confirmation from './components/pages/confirmation';
 
 const Home = () => (
   <>
@@ -24,7 +25,7 @@ const Home = () => (
 // Layout wrapper to hide Header on specific routes
 const Layout = ({ children }) => {
   const location = useLocation();
-  const noHeaderRoutes = ['/dashboard', '/bookchicken'];
+  const noHeaderRoutes = ['/dashboard', '/bookchicken', '/confirmation'];
 
   return (
     <div className="bg-gray-50 min-h-screen w-full overflow-x-hidden">
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/bookchicken" element={<BookChicken />} />
+          <Route path="/confirmation" element={<Confirmation />} />
         </Routes>
       </Layout>
     </Router>

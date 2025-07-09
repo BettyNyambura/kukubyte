@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -16,12 +19,31 @@ const LoginPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Login form submitted:', formData);
-    // Example: call your API
-    // loginUser(formData);
+
+    try {
+      const response = await axios.post(
+        'http://127.0.0.1:5000/api/auth/login',
+        {
+          email: formData.email,
+          password: formData.password
+        }
+      );
+
+      console.log('Login success:', response.data);
+
+      // Save token if returned
+      if (response.data.access_token) {
+        localStorage.setItem('token', response.data.access_token);
+        // Navigate to dashboard or home
+        navigate('/dashboard');
+      }
+
+    } catch (error) {
+      console.error('Login failed:', error.response?.data || error.message);
+      // Show error message to user
+    }
   };
 
   const handleForgotPassword = () => {

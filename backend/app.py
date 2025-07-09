@@ -6,16 +6,21 @@ from database import db
 from routes.auth import auth_bp
 from routes.chickens import chickens_bp
 from routes.orders import orders_bp
+from flask_jwt_extended import JWTManager
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
     # Initialize CORS
-    CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173/"}})
+    CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
 
     # Initialize Flask-Migrate
     migrate = Migrate(app, db)
+
+    # initialize JWTManager
+    jwt = JWTManager(app)
 
 
     # Initialize SQLAlchemy

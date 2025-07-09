@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import logo from './images/logo.jpg';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 const BookChicken = () => {
   const [kgs, setKgs] = useState('');
@@ -143,6 +145,7 @@ const BookChicken = () => {
           {/* Submit */}
           <button
             type="submit"
+            onClick={() => navigate('/confirmation')}
             className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-2 rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg"
           >
             Place Order
