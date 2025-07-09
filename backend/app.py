@@ -1,16 +1,42 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
+from flask_migrate import Migrate
+from config import Config
+from database import db
+from routes.auth import auth_bp
+from routes.chickens import chickens_bp
+from routes.orders import orders_bp
 
-app = Flask(__name__)
-CORS(app)
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
-@app.route("/api/test")
-def test():
-    return jsonify({"message": "Backend is working!"})
+    # Initialize CORS
+    CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173/"}})
 
-@app.route("/")
-def index():
-    return "Welcome to the Chicken Booking API!"
+    # Initialize Flask-Migrate
+    migrate = Migrate(app, db)
 
-if __name__ == "__main__":
+
+    # Initialize SQLAlchemy
+    db.init_app(app)
+
+    # Register blueprints
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(chickens_bp, url_prefix='/api/chickens')
+    app.register_blueprint(orders_bp, url_prefix='/api/orders')
+
+    # Root endpoint
+    @app.route('/')
+    def index():
+        return {"message": "Welcome to Kukubyte API"}, 200
+
+    # Create database tables
+    with app.app_context():
+        db.create_all()
+
+    return app
+
+if __name__ == '__main__':
+    app = create_app()
     app.run(debug=True)
