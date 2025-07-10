@@ -52,9 +52,11 @@ kukubyte/
     Create and activate a virtual environment:
    ```
 2. Run
+   '''bash
    python -m venv venv
    .\venv\Scripts\activate
    Install dependencies:
+   '''
 3. Run
    pip install -r requirements.txt
    (Create requirements.txt with: flask flask-cors flask-migrate flask-sqlalchemy flask-jwt-extended python-dotenv if not present.)
