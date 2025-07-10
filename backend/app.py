@@ -37,8 +37,8 @@ def create_app():
         return {"message": "Welcome to Kukubyte API"}, 200
 
     # Create database tables
-    with app.app_context():
-        db.create_all()
+    #with app.app_context():
+     #   db.create_all()
 
     return app
 
