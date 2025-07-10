@@ -44,15 +44,25 @@ def create_order():
     if chicken.stock < quantity:
         return jsonify({"error": "Insufficient stock"}), 400
     
+    try:   
+        quantity = float(quantity)
+    except (ValueError, TypeError):
+        return jsonify({"error": "Invalid quantity format"}), 422
+    
     order = Booking(
         user_id=current_user_id,
         chicken_id=chicken_id,
         quantity=quantity,
         location=location
     )
-    chicken.stock -= quantity
-    db.session.add(order)
-    db.session.commit()
+    try:
+        chicken.stock -= quantity
+        db.session.add(order)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 422
+    
     return jsonify({"message": "Order created", "order_id": order.id}), 201
 
 @orders_bp.route('/<int:order_id>/status', methods=['PATCH'])
