@@ -26,8 +26,7 @@ def get_orders():
         "quantity": order.quantity,
         "location": order.location,
         "status": order.status,
-        "order_date": order.order_date.isoformat(),
-        "username": order.user.username if order.user else "Unknown"
+        "order_date": order.order_date.isoformat()
     } for order in orders]), 200
 
 
