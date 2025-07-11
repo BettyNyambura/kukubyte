@@ -160,7 +160,7 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-gray-50 px-6 py-8">
       <header className="flex justify-between items-center mb-6">
         <div className="flex items-center space-x-4">
-          <img src={logo} alt="Logo" className="w-16 h-16" />
+          <img src={logo} alt="Logo" className="w-32 h-32" />
           <h1 className="text-2xl font-bold text-green-700">Admin Dashboard</h1>
         </div>
         <div>
