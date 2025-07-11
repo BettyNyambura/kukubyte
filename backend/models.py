@@ -44,6 +44,7 @@ class Booking(db.Model):
     status = db.Column(db.String(20), default='pending')
     user = db.relationship('User', backref=db.backref('bookings', lazy=True))
     chicken = db.relationship('Chicken', backref=db.backref('bookings', lazy=True))
+    weight = db.Column(db.Float, nullable=True)
 
     def __init__(self, user_id, chicken_id, quantity, location, status='pending'):
         self.user_id = user_id
@@ -51,3 +52,11 @@ class Booking(db.Model):
         self.quantity = quantity
         self.location = location
         self.status = status
+
+class ChickenWeightStock(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    chicken_id = db.Column(db.Integer, db.ForeignKey('chicken.id'), nullable=False)
+    weight = db.Column(db.Float, nullable=False)  # e.g., 1.2 kg
+    stock = db.Column(db.Integer, nullable=False, default=0)  # number of chickens
+
+    chicken = db.relationship('Chicken', backref=db.backref('weight_stocks', lazy=True))

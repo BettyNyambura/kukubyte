@@ -12,7 +12,7 @@ const AboutSection = () => {
         </h2>
         <div className="max-w-3xl mx-auto">
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            I'm a poultry farmer based in Your Area. Kukubyte helps me connect directly with you, the customer—no middlemen, just fresh chicken.
+            I'm a poultry farmer based in Kikuyu Area, Nairobi, Kenya. This site helps me connect directly with customers. I rear healthy chicken, and I give them more time to mature compared to the normal maturity period within my locality.  
           </p>
           <div className="bg-green-50 p-6 rounded-lg">
             <h3 className="text-xl font-semibold text-green-800 mb-3">Why Choose Us?</h3>

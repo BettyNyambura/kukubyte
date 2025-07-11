@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from './pages/images/logo.jpg'
 
 const ChickenCard = () => {
   return (
     <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 text-center">
-      <div className="text-6xl mb-4">🐔</div>
+      <img
+        src={logo}
+        alt="Logo"
+        className="w-36 h-36 md:w-40 md:h-40 object-contain mb-2 mx-auto"
+      />  
       <h3 className="text-2xl font-semibold text-gray-800 mb-2">Broiler Chicken</h3>
       <p className="text-lg text-gray-600 mb-4">Sold per kilogram</p>
-      <p className="text-3xl font-bold text-green-600 mb-6">KES 400 / KG</p>
+      <p className="text-3xl font-bold text-green-600 mb-6">KES 380 / KG</p>
       <Link
         to="/signup"
         className="inline-block bg-gradient-to-r from-green-600 to-lime-500 text-white px-6 py-3 rounded-full font-medium shadow-md hover:from-green-700 hover:to-lime-600 transition"
@@ -26,7 +31,7 @@ const ChickensSection = () => {
           Farm Fresh Broiler Chickens
         </h2>
         <p className="text-lg text-gray-600 mb-12">
-          Get clean, fully matured chickens straight from the farm. No middlemen, just healthy birds.
+          Get clean, fully matured chickens straight from the farm.
         </p>
         <div className="max-w-md mx-auto">
           <ChickenCard />

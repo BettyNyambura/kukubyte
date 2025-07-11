@@ -17,9 +17,9 @@ const WorkStep = ({ number, title, description }) => {
 const HowItWorksSection = () => {
   const steps = [
     { number: 1, title: "Sign Up", description: "Create an account to start booking." },
-    { number: 2, title: "Select Chicken", description: "Choose your preferred chicken type." },
+    { number: 2, title: "Order Chicken", description: "Choose the weight and number of chickens to order." },
     { number: 3, title: "Choose Location", description: "Specify your delivery location." },
-    { number: 4, title: "Wait for Delivery", description: "Get confirmation and enjoy fresh chicken!" }
+    { number: 4, title: "Wait for Delivery", description: "Get confirmation and wait to enjoy fresh chicken!" }
   ];
 
   return (

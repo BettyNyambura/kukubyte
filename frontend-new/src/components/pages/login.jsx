@@ -35,14 +35,29 @@ const LoginPage = () => {
 
       // Save token if returned
       if (response.data.access_token) {
-        localStorage.setItem('token', response.data.access_token);
-        // Navigate to dashboard or home
-        navigate('/dashboard');
+        const token = response.data.access_token;
+        localStorage.setItem('access_token', token);
+
+        // Fetch user profile to get role
+        const profileRes = await axios.get('http://127.0.0.1:5000/api/auth/profile', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const role = profileRes.data.role;
+        localStorage.setItem('user_role', role);
+
+        // Navigate based on role
+        if (role === 'admin') {
+          navigate('/admindash');
+        } else {
+          navigate('/dashboard');
+        }
       }
 
     } catch (error) {
       console.error('Login failed:', error.response?.data || error.message);
       // Show error message to user
+      alert(error.response?.data?.error || 'Login failed');
     }
   };
 
@@ -96,12 +111,15 @@ const LoginPage = () => {
               Forgot password?
             </button>
           </div>
-          <button
-            onClick={handleSubmit}
-            className="w-full bg-green-500 text-white font-semibold py-3 rounded-lg hover:bg-green-600 hover:text-black transition-all shadow-lg"
-          >
-            Login
-          </button>
+          
+          <form onSubmit={handleSubmit}>
+            <button
+              type="submit"
+              className="w-full bg-green-500 text-white font-semibold py-3 rounded-lg hover:bg-green-600 hover:text-black transition-all shadow-lg"
+            >
+              Login
+            </button>
+          </form>
         </div>
         
         <div className="mt-6 text-center">

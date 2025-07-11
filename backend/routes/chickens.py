@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from database import db
-from models import Chicken
+from models import Chicken, ChickenWeightStock
 import jwt
 from config import Config
 
