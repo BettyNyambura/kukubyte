@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [newStock, setNewStock] = useState({ weight: '', stock: '' });
+  const [newStock, setNewStock] = useState({ weight: '', stock: '', chicken_id: '' });
   const [updateStock, setUpdateStock] = useState({ id: null, quantity: '' });
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const AdminDashboard = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setStocks([...stocks, res.data]);
-      setNewStock({ weight: '', stock: '' });
+      setNewStock({ weight: '', stock: '', chicken_id: '' });
       setSuccessMessage('Stock added successfully');
       setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
@@ -160,8 +160,8 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-gray-50 px-6 py-8">
       <header className="flex justify-between items-center mb-6">
         <div className="flex items-center space-x-4">
-          <img src={logo} alt="Logo" className="w-32 h-32" />
-          <h1 className="text-2xl font-bold text-green-700">Admin Dashboard</h1>
+          <img src={logo} alt="Logo" className="w-24 h-24" />
+          <h1 className="text-3xl font-bold text-green-700">Admin Dashboard</h1>
         </div>
         <div>
           <p className="text-sm text-gray-600">
@@ -197,7 +197,7 @@ const AdminDashboard = () => {
                 </p>
                 <p>
                   <strong>Quantity:</strong> {order.quantity} •{' '}
-                  <strong>Weight:</strong> {order.weight || 'N/A'} kg •{' '}
+                  <strong>Weight:</strong> {order.weight ? `${order.weight} kg` : 'Not specified'} •{' '}
                   <strong>Location:</strong> {order.location}
                 </p>
                 <p>
@@ -235,14 +235,28 @@ const AdminDashboard = () => {
           <div className="mb-6">
             <h3 className="text-md font-semibold mb-2">Add New Stock</h3>
             <form onSubmit={handleAddStock} className="flex space-x-4">
+              <select
+                value={newStock.chicken_id}
+                onChange={(e) => setNewStock({ ...newStock, chicken_id: e.target.value })}
+                className="border rounded px-2 py-1 text-sm w-1/3"
+                required
+              >
+                <option value="">Select Chicken</option>
+                {[...new Set(stocks.map(s => s.chicken_id))].map(chicken_id => {
+                  const stock = stocks.find(s => s.chicken_id === chicken_id);
+                  return (
+                    <option key={chicken_id} value={chicken_id}>
+                      {stock.chicken_name}
+                    </option>
+                  );
+                })}
+              </select>
               <input
                 type="number"
                 step="0.1"
                 placeholder="Weight (kg)"
                 value={newStock.weight}
-                onChange={(e) =>
-                  setNewStock({ ...newStock, weight: e.target.value })
-                }
+                onChange={(e) => setNewStock({ ...newStock, weight: e.target.value })}
                 className="border rounded px-2 py-1 text-sm w-1/3"
                 required
               />
@@ -250,9 +264,7 @@ const AdminDashboard = () => {
                 type="number"
                 placeholder="Stock (chickens)"
                 value={newStock.stock}
-                onChange={(e) =>
-                  setNewStock({ ...newStock, stock: e.target.value })
-                }
+                onChange={(e) => setNewStock({ ...newStock, stock: e.target.value })}
                 className="border rounded px-2 py-1 text-sm w-1/3"
                 required
               />
@@ -273,7 +285,7 @@ const AdminDashboard = () => {
                 className="flex justify-between items-center border-b py-4"
               >
                 <p>
-                  {stock.weight} kg — {stock.stock} chickens
+                  {stock.chicken_name} • {stock.weight} kg • {stock.stock} chickens
                 </p>
                 <div className="flex items-center space-x-2">
                   {updateStock.id === stock.id ? (

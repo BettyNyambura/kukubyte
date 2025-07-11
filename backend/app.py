@@ -7,6 +7,7 @@ from routes.auth import auth_bp
 from routes.chickens import chickens_bp
 from routes.orders import orders_bp
 from routes.admin import admin_bp
+
 from flask_jwt_extended import JWTManager
 
 

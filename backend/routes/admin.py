@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from database import db
-from models import Booking, ChickenWeightStock, User
+from models import Booking, ChickenWeightStock, User, Chicken
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -25,7 +25,7 @@ def get_all_orders():
             "id": o.id,
             "username": o.user.username,
             "quantity": o.quantity,
-            "weight": getattr(o, "weight", None),
+            "weight": o.weight,
             "location": o.location,
             "status": o.status,
             "order_date": o.order_date.isoformat(),
@@ -45,7 +45,9 @@ def get_weight_stocks():
         {
             "id": s.id,
             "weight": s.weight,
-            "stock": s.stock
+            "stock": s.stock,
+            "chicken_id": s.chicken_id,
+            "chicken_name": s.chicken.name
         } for s in stocks
     ]), 200
 
@@ -59,9 +61,10 @@ def add_stock():
     data = request.get_json()
     weight = data.get('weight')
     stock = data.get('stock')
+    chicken_id = data.get('chicken_id')
 
-    if not weight or not stock:
-        return jsonify({'error': 'Weight and stock are required'}), 400
+    if not all([weight, stock, chicken_id]):
+        return jsonify({'error': 'Weight, stock, and chicken_id are required'}), 400
 
     try:
         weight = float(weight)
@@ -71,13 +74,15 @@ def add_stock():
     except (ValueError, TypeError):
         return jsonify({'error': 'Invalid weight or stock value'}), 400
 
-    new_stock = ChickenWeightStock(weight=weight, stock=stock)
+    new_stock = ChickenWeightStock(weight=weight, stock=stock, chicken_id=chicken_id)
     db.session.add(new_stock)
     db.session.commit()
     return jsonify({
         "id": new_stock.id,
         "weight": new_stock.weight,
-        "stock": new_stock.stock
+        "stock": new_stock.stock,
+        "chicken_id": new_stock.chicken_id,
+        "chicken_name": new_stock.chicken.name
     }), 201
 
 # PATCH stock by ID
@@ -106,7 +111,9 @@ def update_stock(stock_id):
     return jsonify({
         "id": stock.id,
         "weight": stock.weight,
-        "stock": stock.stock
+        "stock": stock.stock,
+        "chicken_id": stock.chicken_id,
+        "chicken_name": stock.chicken.name
     }), 200
 
 # DELETE stock by ID
@@ -137,6 +144,15 @@ def update_order_status(order_id):
 
     if new_status not in ['pending', 'confirmed', 'delivered']:
         return jsonify({'error': 'Invalid status'}), 400
+
+    if new_status in ['confirmed', 'delivered'] and order.status == 'pending':
+        stock = ChickenWeightStock.query.filter_by(chicken_id=order.chicken_id, weight=order.weight).first()
+        if not stock:
+            return jsonify({'error': 'No stock available for this weight'}), 400
+        if stock.stock < order.quantity:
+            return jsonify({'error': 'Insufficient stock'}), 400
+        stock.stock -= int(order.quantity)
+        db.session.commit()
 
     order.status = new_status
     db.session.commit()
