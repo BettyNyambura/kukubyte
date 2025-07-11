@@ -83,11 +83,7 @@ const BookChicken = () => {
       {user && (
         <div className="absolute flex items-center space-x-4 top-6 right-6">
           <span className="text-sm font-medium text-gray-700">
-<<<<<<< HEAD
             Logged in as <span className="text-green-800 font-bold">{user.username}</span>
-=======
-            Logged in as <span className="font-bold text-green-800">{user.name}</span>
->>>>>>> aba9e4e5dd12ebfc585cadd2fa9515189763254b
           </span>
           <button
             onClick={handleLogout}
@@ -103,15 +99,9 @@ const BookChicken = () => {
           <img
             src={logo}
             alt="Logo"
-<<<<<<< HEAD
-            className="w-36 h-36 md:w-40 md:h-40 object-contain mb-2"
-          />          
-          <h1 className="text-2xl font-semibold text-gray-800 text-center">
-=======
             className="object-contain mb-2 w-36 h-36 md:w-40 md:h-40"
           />
           <h1 className="text-2xl font-semibold text-center text-gray-800">
->>>>>>> aba9e4e5dd12ebfc585cadd2fa9515189763254b
             Order Fresh Chicken
           </h1>
         </div>
@@ -145,11 +135,7 @@ const BookChicken = () => {
               value={kgs}
               onChange={(e) => setKgs(e.target.value)}
               required
-<<<<<<< HEAD
               className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-=======
-              className="w-full px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
->>>>>>> aba9e4e5dd12ebfc585cadd2fa9515189763254b
             >
               <option value="" disabled>
                 Choose weight
@@ -216,13 +202,8 @@ const BookChicken = () => {
           {/* Submit */}
           <button
             type="submit"
-<<<<<<< HEAD
-            disabled={loading}
-            className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-2 rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-=======
             onClick={() => navigate('/confirmation')}
             className="w-full py-2 text-white transition-all rounded-lg shadow-md bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 hover:shadow-lg"
->>>>>>> aba9e4e5dd12ebfc585cadd2fa9515189763254b
           >
             {loading ? 'Placing Order...' : 'Place Order'}
           </button>
